@@ -22,5 +22,8 @@ def root():
 
 @app.post("/review")
 def review(request: CodeRequest):
+    if not request.code.strip():
+        return {"error": "Code cannot be empty"}
+
     result = review_code(request.code, request.language)
     return result
